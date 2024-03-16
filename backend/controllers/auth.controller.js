@@ -71,7 +71,13 @@ export const signin = async (req, res) => {
   }
 };
 export const logout = (req, res) => {
-  res.json({
-    msg: "hi form logout",
-  });
+  try {
+    res.cookie("jwt", "", { maxAge: 0 });
+    res.status(200).json({ msg: "logged out successfully" });
+  } catch (error) {
+    console.log("error in logout controller", error.message);
+    res.status(400).json({
+      error: error.message,
+    });
+  }
 };
