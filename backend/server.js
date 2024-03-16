@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import rootRoute from "./routes/index.js";
+import connectToMongo from "../db/connetTOMongo.js";
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
@@ -13,4 +14,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1", rootRoute);
 
-app.listen(PORT);
+app.listen(PORT, () => {
+  connectToMongo();
+});
