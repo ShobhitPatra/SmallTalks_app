@@ -4,6 +4,7 @@ import rootRoute from "./routes/index.js";
 import connectToMongo from "../db/connetTOMongo.js";
 const app = express();
 dotenv.config();
+app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
@@ -15,5 +16,6 @@ app.get("/", (req, res) => {
 app.use("/api/v1", rootRoute);
 
 app.listen(PORT, () => {
+  console.log(`server running on ${PORT}`);
   connectToMongo();
 });

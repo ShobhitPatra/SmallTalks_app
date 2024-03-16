@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
     msg: "hi from auth",
   });
 });
-router.get("/signup", signup);
+router.post("/signup", signup);
 router.get("/signin", signin);
 router.get("/logout", logout);
 
