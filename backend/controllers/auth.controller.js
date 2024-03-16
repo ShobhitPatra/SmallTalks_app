@@ -1,5 +1,6 @@
 import User from "../../models/user.model.js";
 import bcrypt from "bcryptjs";
+import tokenConfiguration from "../../utils/tokenConfiguration.js";
 
 export const signup = async (req, res) => {
   try {
@@ -33,7 +34,7 @@ export const signup = async (req, res) => {
       password: hashedPassword,
       avatar: gender === "male" ? avatar_male : avatar_female,
     });
-
+    tokenConfiguration(newUser._id, res);
     res.status(201).json({
       _id: newUser._id,
       username,
@@ -46,10 +47,28 @@ export const signup = async (req, res) => {
     });
   }
 };
-export const signin = (req, res) => {
-  res.json({
-    msg: "hi form signin",
-  });
+export const signin = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    const passwordCheck = await bcrypt.compare(password, user?.password || "");
+    if (!user || !passwordCheck) {
+      res.status(400).json({
+        msg: "invalid username or password",
+      });
+    }
+    tokenConfiguration(user._id, res);
+    res.status(201).json({
+      userId: user._id,
+      fullname: user.fullname,
+      username: user.username,
+    });
+  } catch (error) {
+    console.log("error in signin");
+    res.status(400).json({
+      error: error.message,
+    });
+  }
 };
 export const logout = (req, res) => {
   res.json({

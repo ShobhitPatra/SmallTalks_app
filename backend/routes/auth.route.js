@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
   });
 });
 router.post("/signup", signup);
-router.get("/signin", signin);
-router.get("/logout", logout);
+router.post("/signin", signin);
+router.post("/logout", logout);
 
 export default router;
