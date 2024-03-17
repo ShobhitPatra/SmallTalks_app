@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import rootRoute from "./routes/index.js";
 import connectToMongo from "../db/connetTOMongo.js";
+import cookieParser from "cookie-parser";
 const app = express();
 dotenv.config();
 app.use(express.json());
