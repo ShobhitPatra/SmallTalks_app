@@ -7,20 +7,21 @@ const sendMessage = async (req, res) => {
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
-    const conversation = await Conversation.findOne({
+    let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
     });
 
     if (!conversation) {
       conversation = await Conversation.create({
         participants: [senderId, receiverId],
+        messages: [],
       });
     }
 
     const newMessage = await Message.create({
       senderId,
       receiverId,
-      message,
+      messages: message,
     });
 
     if (newMessage) {
