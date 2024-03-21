@@ -1,8 +1,9 @@
 import { promise } from "zod";
 import Conversation from "../../models/conversation.model.js";
 import Message from "../../models/message.model.js";
+import User from "../../models/user.model.js";
 
-const sendMessage = async (req, res) => {
+export const sendMessage = async (req, res) => {
   try {
     const { message } = req.body;
     const { id: receiverId } = req.params;
@@ -31,8 +32,10 @@ const sendMessage = async (req, res) => {
     }
 
     // await Promise.all(conversation.save(), newMessage.save());
-    await conversation.save();
-    await newMessage.save();
+    // await conversation.save();
+    // await newMessage.save();
+
+    await Promise.all(conversation.save(), newMessage.save());
 
     res.status(201).json({
       newMessage,
@@ -45,4 +48,22 @@ const sendMessage = async (req, res) => {
   }
 };
 
-export default sendMessage;
+export const getMessages = async (req, res) => {
+  try {
+    const { id: userToChatId } = req.params;
+    const senderUserId = req.userId;
+    const conversation = await Conversation.find({
+      participants: { $all: [senderUserId, userToChatId] },
+    }).populate("messages");
+
+    if (!conversation) {
+      return res.status(401).json([]);
+    }
+    return res.status(201).json(conversation.messages);
+  } catch (error) {
+    console.log("error in getMessage controller", error.message);
+    res.status(401).json({
+      error: error.message,
+    });
+  }
+};
