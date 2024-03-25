@@ -6,7 +6,7 @@ export const Login = () => {
     <>
       <div className="flex flex-col items-center h-screen justify-center min-w-96 mx-auto">
         <div className="flex bg-slate-800 flex-col rounded-lg p-8">
-          <div className="text-3xl font-semibold text-slate-40000 my-2 flex items-center justify-center">
+          <div className="text-3xl font-semibold text-slate-400 my-2 flex items-center justify-center">
             <h1>LOGIN</h1>
           </div>
           <form className="flex flex-col items-center ">
@@ -22,7 +22,7 @@ export const Login = () => {
             />
             <Link
               to="/signup"
-              className="text-blue-500 my-2 hover:text-pink-400"
+              className="text-blue-500 my-2 hover:text-pink-400 hover:cursor-pointer"
             >
               Not registered yet ?
             </Link>
