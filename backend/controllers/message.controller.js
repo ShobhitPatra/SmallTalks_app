@@ -1,7 +1,6 @@
-import { promise } from "zod";
-import Conversation from "../../models/conversation.model.js";
-import Message from "../../models/message.model.js";
-import User from "../../models/user.model.js";
+import Conversation from "../models/conversation.model.js";
+import Message from "../models/message.model.js";
+import User from "../models/user.model.js";
 
 export const sendMessage = async (req, res) => {
   try {
@@ -32,10 +31,8 @@ export const sendMessage = async (req, res) => {
     }
 
     // await Promise.all(conversation.save(), newMessage.save());
-    // await conversation.save();
-    // await newMessage.save();
-
-    await Promise.all(conversation.save(), newMessage.save());
+    await conversation.save();
+    await newMessage.save();
 
     res.status(201).json({
       newMessage,
@@ -43,7 +40,7 @@ export const sendMessage = async (req, res) => {
   } catch (error) {
     console.log("error in send message controller", error.message);
     res.status(401).json({
-      error: error.message,
+      error: "internal server error",
     });
   }
 };
@@ -52,18 +49,21 @@ export const getMessages = async (req, res) => {
   try {
     const { id: userToChatId } = req.params;
     const senderUserId = req.userId;
-    const conversation = await Conversation.find({
+    const conversation = await Conversation.findOne({
       participants: { $all: [senderUserId, userToChatId] },
     }).populate("messages");
 
     if (!conversation) {
       return res.status(401).json([]);
     }
-    return res.status(201).json(conversation.messages);
+
+    const messages = conversation.messages;
+
+    res.status(200).json(messages);
   } catch (error) {
     console.log("error in getMessage controller", error.message);
     res.status(401).json({
-      error: error.message,
+      error: "internal server error",
     });
   }
 };

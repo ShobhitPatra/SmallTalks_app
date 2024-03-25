@@ -1,4 +1,4 @@
-import User from "../../models/user.model.js";
+import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import tokenConfiguration from "../../utils/tokenConfiguration.js";
 
@@ -43,7 +43,7 @@ export const signup = async (req, res) => {
   } catch (error) {
     console.log("error in signup function");
     res.status(500).json({
-      error: error.message,
+      error: "internal server error",
     });
   }
 };
@@ -66,7 +66,7 @@ export const signin = async (req, res) => {
   } catch (error) {
     console.log("error in signin");
     res.status(400).json({
-      error: error.message,
+      error: "internal server error",
     });
   }
 };
@@ -77,7 +77,7 @@ export const logout = (req, res) => {
   } catch (error) {
     console.log("error in logout controller", error.message);
     res.status(400).json({
-      error: error.message,
+      error: "internal server error",
     });
   }
 };
