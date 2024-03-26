@@ -11,7 +11,6 @@ export const Signup = () => {
             <h1>SIGNUP</h1>
           </div>
           <form className="flex flex-col">
-            {/* fullname, username, gender, password, confirmedPassword  */}
             <input
               type="text"
               placeholder="fullname"
