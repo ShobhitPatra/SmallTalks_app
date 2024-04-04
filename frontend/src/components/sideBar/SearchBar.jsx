@@ -1,10 +1,11 @@
 import React from "react";
+import { IoSearch } from "react-icons/io5";
 
 const SearchBar = () => {
   return (
-    <div className="flex p-2 ">
+    <div className="flex p-2 m-2  items-center">
       <label className="input input-bordered flex items-center gap-2 ">
-        <input type="text" className="grow" placeholder="Search" />
+        <input type="text" className="grow m-2" placeholder="Search" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"
@@ -18,7 +19,8 @@ const SearchBar = () => {
           />
         </svg>
       </label>
-      <button className="btn">Search</button>
+
+      <button className="btn btn-info mx-3">Search</button>
     </div>
   );
 };

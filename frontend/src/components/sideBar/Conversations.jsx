@@ -1,7 +1,20 @@
 import React from "react";
+import Conversation from "./Conversation";
 
 const Conversations = () => {
-  return <div>Conversations</div>;
+  return (
+    <div className="flex flex-col overflow-auto">
+      <Conversation />
+      <Conversation />
+      <Conversation />
+      <Conversation />
+      <Conversation />
+      <Conversation />
+      <Conversation />
+      <Conversation />
+      <Conversation />
+    </div>
+  );
 };
 
 export default Conversations;
