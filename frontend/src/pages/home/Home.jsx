@@ -1,13 +1,13 @@
 import React from "react";
 
-import SideBar from "../../components/sideBar/SideBar";
+import MessageContainer from "../../components/messages/MessageContainer";
+import { SideBar } from "../../components/sideBar/SideBar";
 
-const Home = () => {
+export const Home = () => {
   return (
-    <div>
+    <div className="flex h-screen w-full rounded-lg overflow-hidden">
       <SideBar />
+      <MessageContainer />
     </div>
   );
 };
-
-export default Home;

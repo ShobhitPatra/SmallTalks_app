@@ -3,9 +3,9 @@ import SearchBar from "./SearchBar";
 import Conversations from "./Conversations";
 import LogoutBtn from "./LogoutBtn";
 
-const SideBar = () => {
+export const SideBar = () => {
   return (
-    <div className="flex flex-col h-screen  p-4 bg-slate-800">
+    <div className="flex flex-col h-screen p-4 bg-slate-800   ">
       <SearchBar />
       <div className="divider px-2"></div>
       <Conversations />
@@ -13,5 +13,3 @@ const SideBar = () => {
     </div>
   );
 };
-
-export default SideBar;

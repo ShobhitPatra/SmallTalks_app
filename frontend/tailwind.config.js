@@ -5,4 +5,8 @@ export default {
     extend: {},
   },
   plugins: [require("daisyui")],
+  fontFamily: {
+    sans: ["Bungee Spice", "sans-serif"],
+    spice: ["Bungee Spice", "sans-serif"],
+  },
 };
