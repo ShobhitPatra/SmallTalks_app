@@ -3,10 +3,12 @@ import dotenv from "dotenv";
 import rootRoute from "./routes/index.js";
 import connectToMongo from "../db/connetTOMongo.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 const app = express();
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
