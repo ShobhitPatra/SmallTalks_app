@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useAuthContext } from "../context/AuthContext";
 
 const UseSignup = () => {
   const [loading, setLoading] = useState(false);
+  const { setAuthUser } = useAuthContext();
   console.log("inside useSignup");
   const signup = async ({
     fullname,
@@ -27,7 +29,7 @@ const UseSignup = () => {
 
     try {
       console.log("inside try");
-      const data = await axios.post(
+      const userData = await axios.post(
         "http://localhost:8000/api/v1/auth/signup",
         {
           fullname,
@@ -37,8 +39,9 @@ const UseSignup = () => {
           confirmedPassword,
         }
       );
-      console.log(JSON.stringify(data));
-      localStorage.setItem("chat-user", JSON.stringify(data));
+      console.log(JSON.stringify(userData));
+      localStorage.setItem("user-info", JSON.stringify(userData.data));
+      setAuthUser(userData);
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -57,17 +60,22 @@ const handleInputErrors = ({
   console.log("inside handleInputErrors");
 
   if (!fullname || !username || !password || !confirmedPassword || !gender) {
-    toast.error("Please fill all the feilds");
+    console.log("Please fill all the feilds");
+
+    toast.error("Please fill in all fields");
+
     return false;
   }
 
   if (password !== confirmedPassword) {
+    console.log("Passwords does not match ");
     toast.error("Passwords does not match ");
     return false;
   }
 
   if (password.length < 8) {
-    toast.error("Password should be atleast 8 characters long");
+    console.log("Password too short");
+    toast.error("Password too short");
     return false;
   }
   return true;
