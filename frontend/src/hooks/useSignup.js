@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useAuthContext } from "../context/AuthContext";
 
-const UseSignup = () => {
+const useSignup = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
   console.log("inside useSignup");
