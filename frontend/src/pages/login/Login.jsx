@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
 
 export const Login = () => {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const { loading, login } = useLogin();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    login(username, password);
+  };
+
   return (
     <>
       <div className="flex flex-col items-center h-screen justify-center min-w-96 mx-auto">
@@ -13,11 +22,19 @@ export const Login = () => {
             <input
               type="text"
               placeholder="username"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
               className="input input-bordered input-info w-full max-w-xs  my-2"
             />
             <input
               type="text"
               placeholder="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
               className="input input-bordered input-info w-full max-w-xs  my-2"
             />
             <Link
@@ -26,7 +43,16 @@ export const Login = () => {
             >
               Not registered yet ?
             </Link>
-            <button className="btn btn-outline btn-accent my-2">Login</button>
+            <button
+              className="btn btn-outline btn-accent my-2"
+              onClick={handleSubmit}
+            >
+              {loading ? (
+                <span className="loading loading-spinner loading-lg"></span>
+              ) : (
+                "Login"
+              )}
+            </button>
           </form>
         </div>
       </div>

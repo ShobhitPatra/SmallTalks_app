@@ -86,7 +86,11 @@ export const Signup = () => {
               className="btn btn-outline btn-accent my-2"
               onClick={handleSubmit}
             >
-              Register
+              {loading ? (
+                <span className="loading loading-spinner loading-lg"></span>
+              ) : (
+                "Register"
+              )}
             </button>
           </form>
         </div>

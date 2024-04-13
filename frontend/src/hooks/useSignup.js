@@ -26,6 +26,7 @@ const useSignup = () => {
     if (!success) {
       return;
     }
+    setLoading(true);
 
     try {
       console.log("inside try");
