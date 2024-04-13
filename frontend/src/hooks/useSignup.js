@@ -82,4 +82,4 @@ const handleInputErrors = ({
   return true;
 };
 
-export default UseSignup;
+export default useSignup;

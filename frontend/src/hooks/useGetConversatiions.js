@@ -11,7 +11,7 @@ export const useGetConversations = () => {
     const getConversations = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("/apiv1/users/");
+        const res = await axios.get("http://localhost:8000/api/v1/users/");
         if (res.error) {
           throw new Error(res.error);
         }

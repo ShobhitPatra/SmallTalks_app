@@ -20,7 +20,7 @@ export const useLogin = () => {
           password,
         }
       );
-      localStorage.setItem("user-info", userData.data);
+      localStorage.setItem("user-info", JSON.stringify(userData.data));
       setAuthUser(userData);
     } catch (error) {
       console.log(error.message);
